@@ -2,41 +2,49 @@ package com.abysalto.backend_project.DummyJSON;
 
 import com.abysalto.backend_project.DummyJSON.dto.DummyJsonProductDTO;
 import com.abysalto.backend_project.DummyJSON.dto.DummyJsonResponseDTO;
+import com.abysalto.backend_project.ProductSource;
 import com.abysalto.backend_project.product.entity.Product;
 import com.abysalto.backend_project.product.repository.ProductRepository;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 @Component
-public class DummyJsonClient {
-    
+@Profile("!test")
+public class DummyJsonClient implements ProductSource {
+
     private final ProductRepository productRepository;
     private final RestClient restClient;
-    
+
     public DummyJsonClient(ProductRepository productRepository) {
         this.productRepository = productRepository;
         this.restClient = RestClient.create("https://dummyjson.com");
     }
-    
+
     @PostConstruct
     public void fetchData() {
+        List<Product> products = fetchProducts();
+        productRepository.saveAll(products);
+    }
+
+    @Override
+    public List<Product> fetchProducts() {
         DummyJsonResponseDTO response = restClient.get()
                                                   .uri("/products?limit=0")
                                                   .retrieve()
                                                   .body(DummyJsonResponseDTO.class);
-        
+
         if (response != null && response.getProducts() != null) {
-            List<Product> products = response.getProducts()
-                                             .stream()
-                                             .map(this::mapToEntity)
-                                             .toList();
-            
-            productRepository.saveAll(products);
+            return response.getProducts()
+                           .stream()
+                           .map(this::mapToEntity)
+                           .toList();
         }
+        return List.of();
     }
-    
+
     private Product mapToEntity(DummyJsonProductDTO dto) {
         Product product = new Product();
         //product.setId(dto.getId());
