@@ -53,24 +53,24 @@ Credentials are DummyJSON users: https://dummyjson.com/users
 
 ### Get token
 POST http://localhost:8080/auth/login
-{
-  "username": "emilys",
-  "password": "emilyspass"
+{<br>
+  "username": "emilys",<br>
+  "password": "emilyspass"<br>
 }
 
 ### Use token
-Add header to every request:
+Add header to every request:<br>
 Authorization: Bearer <token>
 
 ## Endpoints
-Full documentation available on Swagger UI:
+Full documentation available on Swagger UI:<br>
 http://localhost:8080/swagger-ui/index.html
 
 
 ## Testing
-mvn test
+mvn test<br>
 
-Unit tests: ProductControllerTest, ProductServiceTest
+Unit tests: ProductControllerTest, ProductServiceTest<br>
 Integration tests: ProductRepositoryIT
 
 ## Architecture
