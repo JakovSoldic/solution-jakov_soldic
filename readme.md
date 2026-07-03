@@ -41,8 +41,9 @@ Middleware REST API for fetching and displaying products from multiple data sour
 - Maven
 
 ### Run locally
-git clone <url>
-cd backend-project
+
+git clone <br>
+cd backend-project<br>
 mvn spring-boot:run
 
 Application runs on: http://localhost:8080
@@ -64,6 +65,19 @@ Authorization: Bearer <token>
 
 ## Endpoints
 Full documentation available on Swagger UI:
+=======
+POST http://localhost:8080/auth/login <br>
+{<br>
+  "username": "emilys",<br>
+  "password": "emilyspass"<br>
+}
+
+### Use token
+Add header to every request:<br>
+Authorization: Bearer <token>
+
+## Endpoints
+Full documentation available on Swagger UI:<br>
 http://localhost:8080/swagger-ui/index.html
 
 
@@ -71,6 +85,10 @@ http://localhost:8080/swagger-ui/index.html
 mvn test
 
 Unit tests: ProductControllerTest, ProductServiceTest
+=======
+mvn test<br>
+
+Unit tests: ProductControllerTest, ProductServiceTest<br>
 Integration tests: ProductRepositoryIT
 
 ## Architecture
@@ -88,3 +106,4 @@ This project was developed with the assistance of Claude (Anthropic).
 - **Unit & Integration Tests** - Used Claude to understand testing concepts 
   (MockitoExtension, @DataJpaTest)
 - **Debugging** - Used Claude to resolve errors during development
+
