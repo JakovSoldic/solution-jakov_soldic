@@ -28,7 +28,7 @@ Middleware REST API for fetching and displaying products from multiple data sour
 - Java 26
 - Spring Boot 4.1.0
 - Spring Data JPA / Hibernate
-- H2 Database (in-memory)
+- H2 Database
 - Spring Security + OAuth2 Resource Server (JWT)
 - Lombok
 - SpringDoc OpenAPI / Swagger UI 2.3.0
@@ -42,7 +42,7 @@ Middleware REST API for fetching and displaying products from multiple data sour
 
 ### Run locally
 
-git clone <br>
+git clone [url of project] <br>
 cd backend-project<br>
 mvn spring-boot:run
 
@@ -53,39 +53,21 @@ Application uses JWT authentication.
 Credentials are DummyJSON users: https://dummyjson.com/users
 
 ### Get token
-POST http://localhost:8080/auth/login
-{
-  "username": "emilys",
-  "password": "emilyspass"
-}
+POST http://localhost:8080/auth/login<br>
+{<br>
+  "username": "emilys",<br>
+  "password": "emilyspass"<br>
+}<br>
 
 ### Use token
 Add header to every request:
 Authorization: Bearer <token>
 
 ## Endpoints
-Full documentation available on Swagger UI:
-=======
-POST http://localhost:8080/auth/login <br>
-{<br>
-  "username": "emilys",<br>
-  "password": "emilyspass"<br>
-}
-
-### Use token
-Add header to every request:<br>
-Authorization: Bearer <token>
-
-## Endpoints
 Full documentation available on Swagger UI:<br>
 http://localhost:8080/swagger-ui/index.html
 
-
 ## Testing
-mvn test
-
-Unit tests: ProductControllerTest, ProductServiceTest
-=======
 mvn test<br>
 
 Unit tests: ProductControllerTest, ProductServiceTest<br>
